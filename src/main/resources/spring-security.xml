@@ -7,11 +7,31 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
+    <bean id="passwordEncoder"
+            class="org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method="getInstance"/>
+
+    <!-- spring 过滤器链的配置:
+        1) 拦截哪些资源
+        2）什么资源什么权限
+        3）定义认证方式：HTTPBasic,formLogin
+        4) 定义登录页面，定义登录请求地址，定义错误处理方式-->
     <security:http>
-        <security:http-basic />
+        <!--pattern: 需要拦截的资源
+            access: 拦截方式-->
+        <security:intercept-url pattern="/product/index" access="permitAll()" />
+        <security:intercept-url pattern="/**" access="isFullyAuthenticated()" />
+        <!-- http basic认证 -->
+<!--        <security:http-basic  />-->
+        <security:form-login></security:form-login>
     </security:http>
 
+    <!-- 认证管理器
+        1） 认证信息（账户名，密码，当前用户权限）-->
     <security:authentication-manager>
-
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="yangbin1" authorities="ROLE_USER" password="jackbin91"></security:user>
+            </security:user-service>
+        </security:authentication-provider>
     </security:authentication-manager>
 </beans>
