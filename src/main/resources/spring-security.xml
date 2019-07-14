@@ -23,7 +23,10 @@
         <security:intercept-url pattern="/**" access="isFullyAuthenticated()" />
         <!-- http basic认证 -->
 <!--        <security:http-basic  />-->
-        <security:form-login login-page="/userLogin" login-processing-url="/securityLogin"></security:form-login>
+        <security:form-login login-page="/userLogin" login-processing-url="/securityLogin" ></security:form-login>
+
+        <!-- 关闭 spring security csrf机制 -->
+        <security:csrf disabled="true"></security:csrf>
     </security:http>
 
     <!-- 认证管理器
