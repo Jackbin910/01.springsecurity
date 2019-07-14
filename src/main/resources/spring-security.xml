@@ -19,10 +19,11 @@
         <!--pattern: 需要拦截的资源
             access: 拦截方式-->
         <security:intercept-url pattern="/product/index" access="permitAll()" />
+        <security:intercept-url pattern="/userLogin" access="permitAll()" />
         <security:intercept-url pattern="/**" access="isFullyAuthenticated()" />
         <!-- http basic认证 -->
 <!--        <security:http-basic  />-->
-        <security:form-login login-page="/login"></security:form-login>
+        <security:form-login login-page="/userLogin" login-processing-url="/securityLogin"></security:form-login>
     </security:http>
 
     <!-- 认证管理器
