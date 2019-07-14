@@ -10,4 +10,9 @@ public class IndexController {
     public String login(){
         return "login";
     }
+
+    @RequestMapping("/error")
+    public String error(){
+        return "error";
+    }
 }
