@@ -16,7 +16,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = new User("yangbin1", "jackbin91", AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+        User user = new User("yangbin1", "jackbin91",true,true,true,true, AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
         return user;
     }
 }
