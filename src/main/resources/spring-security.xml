@@ -27,7 +27,7 @@
         <security:intercept-url pattern="/**" access="isFullyAuthenticated()" />
         <!-- http basic认证 -->
 <!--        <security:http-basic  />-->
-        <security:form-login login-page="/userLogin" login-processing-url="/securityLogin" default-target-url="/product/index"></security:form-login>
+        <security:form-login login-page="/userLogin" login-processing-url="/securityLogin" default-target-url="/product/index" authentication-success-handler-ref="myAuthenticationSuccessHandler" authentication-failure-handler-ref="myAuthenticationFailureHandler"></security:form-login>
 
         <!-- 自定义权限不足处理 -->
         <security:access-denied-handler error-page="/error" />
@@ -39,11 +39,17 @@
     <!-- 认证管理器
         1） 认证信息（账户名，密码，当前用户权限）-->
     <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
+        <security:authentication-provider user-service-ref="myUserDetailService">
+           <!-- <security:user-service>
                 <security:user name="yangbin1" authorities="ROLE_USER" password="jackbin91"></security:user>
                 <security:user name="yangbin2" authorities="ROLE_ADMIN" password="jackbin91"></security:user>
-            </security:user-service>
+            </security:user-service>-->
         </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="myUserDetailService" class="com.yangbin1.security.MyUserDetailService"></bean>
+
+    <bean id="myAuthenticationSuccessHandler" class="com.yangbin1.security.MyAuthenticationSuccessHandler"></bean>
+
+    <bean id="myAuthenticationFailureHandler" class="com.yangbin1.security.MyAuthenticationFailureHandler"></bean>
 </beans>
